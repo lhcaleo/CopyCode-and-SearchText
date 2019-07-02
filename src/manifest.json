@@ -1,0 +1,31 @@
+{
+    "manifest_version": 2,
+    "version": "1.0",
+    "name": "StackoverFlowToolkit",
+    "description": "Build a toolkit for stackoverflow.",
+    "icons": {
+        "128": "icon128.png",
+        "48": "icon48.png",
+        "16": "icon16.png"
+    },
+    "page_action":{
+        "default_icon":"icon16.png",
+        "defualt_popup":"popup.html",
+        "defualt_title": "StackOverFlowToolkit"
+    },
+    "background":{
+        "scripts":["eventPage.js"],
+        "persistent": false
+    },
+    "permissions":[
+        "tabs",
+        "https://*.stackoverflow.com/*"
+    ],
+    "content_scripts":[
+        {
+            "matches": ["https://*.stackoverflow.com/*"],
+            "js":["content.js", "jquery-3.4.1.min.js"],
+            "run_at": "document_start"
+        }
+    ]
+}
