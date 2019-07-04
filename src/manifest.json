@@ -19,13 +19,16 @@
     },
     "permissions":[
         "tabs",
-        "https://*.stackoverflow.com/*"
+        "https://*.stackoverflow.com/*",
+        "storage"
+    ],
+    "web_accessible_resources": [
+        "*.*"
     ],
     "content_scripts":[
         {
             "matches": ["https://*.stackoverflow.com/*"],
-            "js":["content.js", "jquery-3.4.1.min.js"],
-            "run_at": "document_start"
+            "js":["jquery-3.4.1.min.js","content.js"]
         }
     ]
 }
