@@ -3,30 +3,41 @@
 chrome.runtime.sendMessage({
     todo: "showPageAction"
 });
-alert("Hello from content.js")
-$('span').css('color', "red");
-$('code').css("font-size","15px")
-var btn = document.createElement("button");
-btn.innerHTML="copy";
-btn.setAttribute("class","copyButton");
-$('code').append(btn);
+
+var block = document.querySelectorAll("pre > code");
+block.forEach(addButton);
+
+function addButton(block){
+    var btn = document.createElement("button");
+    btn.className = "copyButton";
+    btn.type = "button"; //The button is a clickable button
+    btn.innerHTML = "Copy";
+    var pre = block.parentNode;
+    pre.parentNode.insertBefore(btn, pre);
+}
 
 var css = {
-        position: 'relative',
-        top: '0.5rem',
-        right: '0.5rem',
-        //z-index: '10',
+        'font-size': '1.1rem',
         display: 'block',
-        padding: '0.25rem 0.5rem',
-        color: 'DimGrey',
+        'z-index': '5',
+        top: '2.7rem',
+        'margin-left': 'auto',
+        padding: '0.3rem 0.7rem',
+        color: '#393a3d',
         'background-color': 'transparent',
-        border: '0'
+        'border-radius': '8px',
+        border: 'none',
+        'box-shadow': 'none'
+}
+var hoverCSS = {
+    color: 'white',
+    'background-color':'#007bff',
+    cursor: 'pointer'
 }
 $('.copyButton').css(css);
-
-//$('pre.default.prettyprint.prettyprinted').hide();
-//$('pre.default.prettyprint.prettyprinted').css("font-size","5px")
-//$('div.user-info').hide();
-//$('div.user-hover').hide();
-//$('span').appendTo('.user-info user-hover');
-//$('button').hide();
+$('.copyButton').mouseover(function(){
+    $('.copyButton').css(hoverCSS);
+});
+$('.copyButton').mouseout(function(){
+    $('.copyButton').css(css);
+});

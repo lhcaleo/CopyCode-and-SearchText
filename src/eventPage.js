@@ -17,7 +17,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             active: true,
             currentWindow: true
         }, function (tabs) {
-            alert("Hello from eventPage.js");
+            //alert("Hello from eventPage.js");
             chrome.pageAction.show(tabs[0].id);
         });
     }
