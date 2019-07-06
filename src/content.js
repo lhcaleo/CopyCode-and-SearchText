@@ -32,7 +32,7 @@ var css = {
         'z-index': '5',
         top: '2.7rem',
         'margin-left': 'auto',
-        padding: '0.3rem 0.7rem',
+        padding: '0.25rem 0.5rem',
         color: '#393a3d',
         'background-color': 'transparent',
         'border-radius': '8px',
@@ -44,20 +44,15 @@ var hoverCSS = {
     'background-color':'#007bff',
     cursor: 'pointer'
 }
-var tooltipCSS = {
-    'background-color':'#555',
-    border: '2px'
-}
+$('.copyButton').css(css);
 
 // Activate tooltip of the button
 $(function() {
     $('.copyButton').tooltip();
 });
-
 // Define CSS of button by event
-$('.copyButton').css(css);
-$('.copyButton').mouseover(function(){
-    $('.copyButton').css(hoverCSS);
+$('.copyButton').mouseover(function(event){
+    $(event.target).css(hoverCSS);
 });
 $('.copyButton').mouseout(function(){
     $('.copyButton').css(css);
