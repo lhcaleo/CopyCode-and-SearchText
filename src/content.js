@@ -19,17 +19,20 @@ function addButton(block){
     btn.className = "copyButton";
     btn.setAttribute("data-toggle","tooltip");
     btn.setAttribute("data-placement","left")
-    btn.setAttribute("title", "Copy to Clipboard\b \b");
+    btn.setAttribute("data-original-title", "Copy to Clipboard\b  \b \b");
+    //btn.setAttribute("title", "Copy to Clipboard\b \b");
     btn.innerHTML = "Copy";
     var pre = block.parentNode;
     pre.parentNode.insertBefore(btn, pre);
-
-    btn.addEventListener('click', function(){
-        // Writes the code to clipboard with Asynchronous Clipboard API
-        navigator.clipboard.writeText(block.innerText);
-    })
+    mouseOver(btn);
+    // Define CSS of button when mouse is out
+    // Hide tooltip of the button
+    $('.copyButton').mouseout(function(){
+        $('.copyButton').css(css);
+        $('.copyButton').tooltip('hide');
+        btn.setAttribute("data-original-title", "Copy to Clipboard\b  \b \b");
+    });
 }
-
 
 // CSS styling for the button
 var css = {
@@ -49,18 +52,21 @@ var hoverCSS = {
     'background-color':'#007bff',
     cursor: 'pointer'
 }
-$('.copyButton').css(css);
 
+$('.copyButton').css(css);
 // Define CSS of button when mouse is over
 // Show tooltip of the button
-$('.copyButton').mouseover(function(event){
-    $(event.target).css(hoverCSS);
-    $('.copyButton').tooltip('show');
-});
-// Define CSS of button when mouse is out
-// Hide tooltip of the button
-$('.copyButton').mouseout(function(){
-    $('.copyButton').css(css);
-    $('.copyButton').tooltip('hide');
-});
+function mouseOver(btn){
+    $('.copyButton').mouseover(function(event){
+        $(event.target).css(hoverCSS);
+        $(event.target).tooltip('show');
+        event.target.addEventListener('click', function(){
+            // Writes the code to clipboard with Asynchronous Clipboard API
+            navigator.clipboard.writeText(block.innerText);
+            event.target.setAttribute("data-original-title", "Copied！\b \b \b");
+            //$(event.target).tooltip('hide');
+            $(event.target).tooltip('show');
+        })
+    });
+}
 
