@@ -3,7 +3,6 @@
  bootstrap.src = "bootstrap.bundle.min.js";
  document.head.appendChild(bootstrap);
 
-
 // A javascript runs on the particular url
 // content script send message to show page action
 chrome.runtime.sendMessage({
@@ -26,6 +25,7 @@ function addButton(block){
     pre.parentNode.insertBefore(btn, pre);
 
     btn.addEventListener('click', function(){
+        // Writes the code to clipboard with Asynchronous Clipboard API
         navigator.clipboard.writeText(block.innerText);
     })
 }
@@ -51,20 +51,16 @@ var hoverCSS = {
 }
 $('.copyButton').css(css);
 
-// Activate tooltip of the button
-$(function() {
-    $('.copyButton').tooltip();
-});
-// Define CSS of button by event
+// Define CSS of button when mouse is over
+// Show tooltip of the button
 $('.copyButton').mouseover(function(event){
     $(event.target).css(hoverCSS);
+    $('.copyButton').tooltip('show');
 });
+// Define CSS of button when mouse is out
+// Hide tooltip of the button
 $('.copyButton').mouseout(function(){
     $('.copyButton').css(css);
+    $('.copyButton').tooltip('hide');
 });
 
-//TODO:
-/**
- * 1. Function copy to clipboard
- * 2. popup a message "copied!" when button is clicked
- */
