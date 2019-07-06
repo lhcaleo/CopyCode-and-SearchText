@@ -28,7 +28,7 @@
     "content_scripts":[
         {
             "matches": ["https://*.stackoverflow.com/*"],
-            "js":["jquery-3.4.1.min.js","content.js"]
+            "js":["jquery-3.4.1.min.js","content.js","bootstrap.bundle.min.js"]
         }
     ]
 }
