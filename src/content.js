@@ -1,4 +1,4 @@
- // include bootstrap
+ // Include bootstrap
  var bootstrap = document.createElement("script");
  bootstrap.src = "bootstrap.bundle.min.js";
  document.head.appendChild(bootstrap);
@@ -13,25 +13,19 @@ chrome.runtime.sendMessage({
 var block = document.querySelectorAll("pre > code");
 block.forEach(addButton);
 
-function addButton(block){
+function addButton(block,item){
     var btn = document.createElement("button");
     btn.type = "button"; //The button is a clickable button
     btn.className = "copyButton";
     btn.setAttribute("data-toggle","tooltip");
-    btn.setAttribute("data-placement","left")
-    btn.setAttribute("data-original-title", "Copy to Clipboard\b  \b \b");
-    //btn.setAttribute("title", "Copy to Clipboard\b \b");
+    btn.setAttribute("data-placement","left");
+    btn.setAttribute("data-original-title", "\b \b \bCopy to Clipboard\b -->\b \b");
     btn.innerHTML = "Copy";
     var pre = block.parentNode;
     pre.parentNode.insertBefore(btn, pre);
-    mouseOver(btn);
-    // Define CSS of button when mouse is out
-    // Hide tooltip of the button
-    $('.copyButton').mouseout(function(){
-        $('.copyButton').css(css);
-        $('.copyButton').tooltip('hide');
-        btn.setAttribute("data-original-title", "Copy to Clipboard\b  \b \b");
-    });
+    // Add mouse listeners
+    mouseOver(btn,item);
+    mouseOut(btn);
 }
 
 // CSS styling for the button
@@ -52,21 +46,39 @@ var hoverCSS = {
     'background-color':'#007bff',
     cursor: 'pointer'
 }
-
+// Initialize button style
 $('.copyButton').css(css);
 // Define CSS of button when mouse is over
 // Show tooltip of the button
-function mouseOver(btn){
-    $('.copyButton').mouseover(function(event){
+function mouseOver(button,item){
+    $(button).mouseover(function(event){
         $(event.target).css(hoverCSS);
+        // Styling tooltip
+        // Show up when mouse is over
         $(event.target).tooltip('show');
+        $(".tooltip-inner").css({
+            "background-color": "black",
+            "color":"white",
+            "text-align": "center",
+            'font-size': '13px',
+            'max-width':'500px',
+            'padding': '0.4rem 0.4rem',
+            'border-radius': '35px',
+        });
         event.target.addEventListener('click', function(){
             // Writes the code to clipboard with Asynchronous Clipboard API
-            navigator.clipboard.writeText(block.innerText);
-            event.target.setAttribute("data-original-title", "Copied！\b \b \b");
-            //$(event.target).tooltip('hide');
+            navigator.clipboard.writeText(block[item].innerText);
+            event.target.setAttribute("data-original-title", "\b \b \bCopied !\b \b \b");
             $(event.target).tooltip('show');
         })
     });
 }
-
+// Define CSS of button when mouse is out
+// Hide tooltip of all buttons
+function mouseOut(button){
+    $('.copyButton').mouseout(function(){
+        $('.copyButton').css(css);
+        $('.copyButton').tooltip('hide');
+        button.setAttribute("data-original-title", "\b \b \bCopy to Clipboard\b -->\b \b");
+    });
+}
