@@ -30,7 +30,6 @@ var css = {
         'font-size': '13px',
         display: 'block',
         'z-index': '5',
-        top: '2.7rem',
         'margin-left': 'auto',
         padding: '0.25rem 0.5rem',
         color: '#393a3d',
