@@ -18,8 +18,8 @@ function addButton(block){
     btn.type = "button"; //The button is a clickable button
     btn.className = "copyButton";
     btn.setAttribute("data-toggle","tooltip");
-    btn.setAttribute("data-placement","top")
-    btn.setAttribute("title", "Copy to clipboard");
+    btn.setAttribute("data-placement","left")
+    btn.setAttribute("title", "Copy to clipboard \b");
     btn.innerHTML = "Copy";
     var pre = block.parentNode;
     pre.parentNode.insertBefore(btn, pre);
@@ -27,16 +27,16 @@ function addButton(block){
 
 // CSS styling for the button
 var css = {
-        'font-size': '13px',
+        'font-size': '11px',
         display: 'block',
         'z-index': '5',
         'margin-left': 'auto',
-        padding: '0.25rem 0.5rem',
-        color: '#393a3d',
+        padding: '0.1rem 0.6rem',
+        color: 'black',
         'background-color': 'transparent',
-        'border-radius': '8px',
-        border: 'none',
-        'box-shadow': 'none'
+        'border-radius': '5px',
+        'box-shadow': 'none',
+        'border': '1.2px solid #606263'
 }
 var hoverCSS = {
     color: 'white',
