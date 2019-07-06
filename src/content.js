@@ -26,12 +26,7 @@ function addButton(block){
     pre.parentNode.insertBefore(btn, pre);
 
     btn.addEventListener('click', function(){
-        var copyDiv = document.createElement("input");
-        copyDiv.value = block.innerText;
-        document.body.appendChild(copyDiv);
-        copyDiv.select();
-        document.execCommand("copy");
-        document.body.removeChild(copyDiv);
+        navigator.clipboard.writeText(block.innerText);
     })
 }
 
@@ -73,5 +68,3 @@ $('.copyButton').mouseout(function(){
  * 1. Function copy to clipboard
  * 2. popup a message "copied!" when button is clicked
  */
-
- 
