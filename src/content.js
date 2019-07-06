@@ -1,8 +1,9 @@
  // include bootstrap
- var script = document.createElement("script");
- script.src = "bootstrap.bundle.min.js";
- document.head.appendChild(script);
- 
+ var bootstrap = document.createElement("script");
+ bootstrap.src = "bootstrap.bundle.min.js";
+ document.head.appendChild(bootstrap);
+
+
 // A javascript runs on the particular url
 // content script send message to show page action
 chrome.runtime.sendMessage({
@@ -19,11 +20,17 @@ function addButton(block){
     btn.className = "copyButton";
     btn.setAttribute("data-toggle","tooltip");
     btn.setAttribute("data-placement","left")
-    btn.setAttribute("title", "Copy to clipboard \b");
+    btn.setAttribute("title", "Copy to Clipboard\b \b");
     btn.innerHTML = "Copy";
     var pre = block.parentNode;
     pre.parentNode.insertBefore(btn, pre);
+
+    btn.addEventListener('click', function(){
+        var copyTextarea = block.innerText;
+        alert(copyTextarea);
+    })
 }
+
 
 // CSS styling for the button
 var css = {
