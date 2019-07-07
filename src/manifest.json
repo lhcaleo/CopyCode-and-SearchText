@@ -19,7 +19,6 @@
     },
     "permissions":[
         "tabs",
-        //"https://*.stackoverflow.com/*",
         "<all_urls>",
         "storage",
         "contextMenus"
@@ -29,7 +28,6 @@
     ],
     "content_scripts":[
         {
-            //"matches": ["https://*.stackoverflow.com/*"],
             "matches": ["<all_urls>"],
             "js":["jquery-3.4.1.min.js","content.js","bootstrap.bundle.min.js"]
         }
