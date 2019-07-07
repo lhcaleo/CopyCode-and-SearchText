@@ -20,3 +20,11 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         });
     }
 });
+
+// Create a menu item for searching on wikipedia
+var menuItem = {
+    "id": "wikipedia",
+    "title": "Search On Wikipedia",
+    "contexts": ["selection"]
+};
+chrome.contextMenus.create(menuItem);
