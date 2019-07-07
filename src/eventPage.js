@@ -23,11 +23,32 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
 // Create a menu item for searching on wikipedia
 var menuItem = {
+    "id": "search",
+    "title": "Search selected text on",
+    "contexts": ["selection"]
+};
+var menuItemWikipedia = {
+    "parentId": "search",
     "id": "wikipedia",
     "title": "Search on Wikipedia",
     "contexts": ["selection"]
 };
+var menuItemBing = {
+    "parentId": "search",
+    "id": "bing",
+    "title": "Search on Bing",
+    "contexts": ["selection"],
+};
+var menuItemBaidu= {
+    "parentId": "search",
+    "id": "youtube",
+    "title": "Search on YouTube",
+    "contexts": ["selection"],
+};
 chrome.contextMenus.create(menuItem);
+chrome.contextMenus.create(menuItemWikipedia);
+chrome.contextMenus.create(menuItemBing);
+chrome.contextMenus.create(menuItemBaidu);
 // Any text you select, it's going to prepare it in a format
 // that can be appended to a URL, Avoid bad title in searching
 // [ and ] is replaced by %5B and %5D at URL encoding time.
@@ -41,10 +62,34 @@ chrome.contextMenus.onClicked.addListener(function(onClickData){
         var wikiURL = "https://en.wikipedia.org/wiki/" + fixedEncodeURL(onClickData.selectionText);
         var createData = {
             "url": wikiURL,
-            "top": 10,
-            "left": 10,
-            "width": parseInt(screen.availWidth/2),
-            "height": parseInt(screen.availHeight/1.7)
+            "top": 200,
+            "left": 200,
+            "width": parseInt(screen.availWidth/1.5),
+            "height": parseInt(screen.availHeight/1.5)
+        };
+        chrome.windows.create(createData);
+    }
+    if(onClickData.menuItemId === "bing" && onClickData.selectionText)
+    {
+        var bingURL = "https://www.bing.com/search?q=" + fixedEncodeURL(onClickData.selectionText);
+        var createData = {
+            "url": bingURL,
+            "top": 200,
+            "left": 200,
+            "width": parseInt(screen.availWidth/1.5),
+            "height": parseInt(screen.availHeight/1.5)
+        };
+        chrome.windows.create(createData);
+    }
+    if(onClickData.menuItemId === "youtube" && onClickData.selectionText)
+    {
+        var youtubeURL = "https://www.youtube.com/results?search_query=" + fixedEncodeURL(onClickData.selectionText);
+        var createData = {
+            "url": youtubeURL,
+            "top": 200,
+            "left": 200,
+            "width": parseInt(screen.availWidth/1.5),
+            "height": parseInt(screen.availHeight/1.5)
         };
         chrome.windows.create(createData);
     }
