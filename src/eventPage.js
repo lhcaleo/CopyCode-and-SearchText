@@ -8,8 +8,6 @@
 // To ask chrome to retrieve all tabs so that we can show the icon
 // Get the tab that is active and in current window 
 // Show the page action by pageAction api
-
-
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     if (request.todo == "showPageAction") {
         chrome.tabs.query({
@@ -64,35 +62,22 @@ function fixedEncodeURL (str){
 }
 // Add listener for this menu item 
 chrome.contextMenus.onClicked.addListener(function(onClickData){
-    if(onClickData.menuItemId === "wikipedia" && onClickData.selectionText)
+    if(onClickData.menuItemId !== "speak" && onClickData.selectionText)
     {
-        var wikiURL = "https://en.wikipedia.org/wiki/" + fixedEncodeURL(onClickData.selectionText);
+        var add_url = fixedEncodeURL(onClickData.selectionText);
+        switch(onClickData.menuItemId){
+            case "wikipedia":
+                var url = "https://en.wikipedia.org/wiki/" + add_url;
+                break;
+            case "bing":
+                var url = "https://www.bing.com/search?q=" + add_url;
+                break;
+            case "youtube":
+                var url = "https://www.youtube.com/results?search_query=" + add_url;
+                break;
+        }
         var createData = {
-            "url": wikiURL,
-            "top": 200,
-            "left": 200,
-            "width": parseInt(screen.availWidth/1.5),
-            "height": parseInt(screen.availHeight/1.5)
-        };
-        chrome.windows.create(createData);
-    }
-    if(onClickData.menuItemId === "bing" && onClickData.selectionText)
-    {
-        var bingURL = "https://www.bing.com/search?q=" + fixedEncodeURL(onClickData.selectionText);
-        var createData = {
-            "url": bingURL,
-            "top": 200,
-            "left": 200,
-            "width": parseInt(screen.availWidth/1.5),
-            "height": parseInt(screen.availHeight/1.5)
-        };
-        chrome.windows.create(createData);
-    }
-    if(onClickData.menuItemId === "youtube" && onClickData.selectionText)
-    {
-        var youtubeURL = "https://www.youtube.com/results?search_query=" + fixedEncodeURL(onClickData.selectionText);
-        var createData = {
-            "url": youtubeURL,
+            "url": url,
             "top": 200,
             "left": 200,
             "width": parseInt(screen.availWidth/1.5),
