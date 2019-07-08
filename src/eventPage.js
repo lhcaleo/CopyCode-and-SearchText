@@ -45,10 +45,17 @@ var menuItemBaidu= {
     "title": "Search on YouTube",
     "contexts": ["selection"],
 };
+var menuItemSpeak = {
+    "parentId": "search",
+    "id": "speak",
+    "title": "Speak selected text",
+    "contexts": ["selection"]
+};
 chrome.contextMenus.create(menuItem);
 chrome.contextMenus.create(menuItemWikipedia);
 chrome.contextMenus.create(menuItemBing);
 chrome.contextMenus.create(menuItemBaidu);
+chrome.contextMenus.create(menuItemSpeak);
 // Any text you select, it's going to prepare it in a format
 // that can be appended to a URL, Avoid bad title in searching
 // [ and ] is replaced by %5B and %5D at URL encoding time.
@@ -92,5 +99,9 @@ chrome.contextMenus.onClicked.addListener(function(onClickData){
             "height": parseInt(screen.availHeight/1.5)
         };
         chrome.windows.create(createData);
+    }
+    if(onClickData.menuItemId === "speak" && onClickData.selectionText)
+    {
+        chrome.tts.speak(onClickData.selectionText, {'rate':0.8});
     }
 });

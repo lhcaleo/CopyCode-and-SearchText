@@ -21,7 +21,8 @@
         "tabs",
         "<all_urls>",
         "storage",
-        "contextMenus"
+        "contextMenus",
+        "tts"
     ],
     "web_accessible_resources": [
         "*.*"
