@@ -7,7 +7,7 @@
 
 // To ask chrome to retrieve all tabs so that we can show the icon
 // Get the tab that is active and in current window 
-// Show the page action by pageAction api
+// Show the page action icon by pageAction api
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     if (request.todo == "showPageAction") {
         chrome.tabs.query({

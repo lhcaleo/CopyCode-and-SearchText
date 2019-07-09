@@ -10,9 +10,10 @@
     },
     "page_action":{
         "default_icon":"icon16.png",
-        "defualt_popup":"popup.html",
-        "defualt_title": "Code copy and Search"
+        "default_popup":"popup.html",
+        "default_title": "Code copy and Search"
     },
+
     "background":{
         "scripts":["eventPage.js"],
         "persistent": false
