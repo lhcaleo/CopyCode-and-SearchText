@@ -11,7 +11,7 @@
   - ![Screen-Shot-Popup](./src/images/Screen-Shot-Popup.png)
 
 - Copy Button
-  - ![Screen-Shot -CopyButton](./src/images/Screen-Shot -CopyButton.png)
+  - ![Screen-Shot -CopyButton](./src/images/Screen-Shot-CopyButton.png)
 
 - Context Menu Item
   - ![Screen-Shot-Menu](./src/images/Screen-Shot-Menu.png)
