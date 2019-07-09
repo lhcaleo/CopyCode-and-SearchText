@@ -37,7 +37,7 @@ var menuItemBing = {
     "title": "Search on Bing",
     "contexts": ["selection"],
 };
-var menuItemBaidu= {
+var menuItemYoutube = {
     "parentId": "search",
     "id": "youtube",
     "title": "Search on YouTube",
@@ -49,23 +49,25 @@ var menuItemSpeak = {
     "title": "Speak selected text",
     "contexts": ["selection"]
 };
-chrome.contextMenus.create(menuItem);
-chrome.contextMenus.create(menuItemWikipedia);
-chrome.contextMenus.create(menuItemBing);
-chrome.contextMenus.create(menuItemBaidu);
-chrome.contextMenus.create(menuItemSpeak);
+chrome.runtime.onInstalled.addListener(function () {
+    chrome.contextMenus.create(menuItem);
+    chrome.contextMenus.create(menuItemWikipedia);
+    chrome.contextMenus.create(menuItemBing);
+    chrome.contextMenus.create(menuItemYoutube);
+    chrome.contextMenus.create(menuItemSpeak);
+});
+
 // Any text you select, it's going to prepare it in a format
 // that can be appended to a URL, Avoid bad title in searching
 // [ and ] is replaced by %5B and %5D at URL encoding time.
-function fixedEncodeURL (str){
-    return encodeURI(str).replace(/%5B/g,'[').replace(/%5D/g, ']');
+function fixedEncodeURL(str) {
+    return encodeURI(str).replace(/%5B/g, '[').replace(/%5D/g, ']');
 }
 // Add listener for this menu item 
-chrome.contextMenus.onClicked.addListener(function(onClickData){
-    if(onClickData.menuItemId !== "speak" && onClickData.selectionText)
-    {
+chrome.contextMenus.onClicked.addListener(function (onClickData) {
+    if (onClickData.menuItemId !== "speak" && onClickData.selectionText) {
         var add_url = fixedEncodeURL(onClickData.selectionText);
-        switch(onClickData.menuItemId){
+        switch (onClickData.menuItemId) {
             case "wikipedia":
                 var url = "https://en.wikipedia.org/wiki/" + add_url;
                 break;
@@ -80,13 +82,14 @@ chrome.contextMenus.onClicked.addListener(function(onClickData){
             "url": url,
             "top": 200,
             "left": 200,
-            "width": parseInt(screen.availWidth/1.5),
-            "height": parseInt(screen.availHeight/1.5)
+            "width": parseInt(screen.availWidth / 1.5),
+            "height": parseInt(screen.availHeight / 1.5)
         };
         chrome.windows.create(createData);
     }
-    if(onClickData.menuItemId === "speak" && onClickData.selectionText)
-    {
-        chrome.tts.speak(onClickData.selectionText, {'rate':0.8});
+    if (onClickData.menuItemId === "speak" && onClickData.selectionText) {
+        chrome.tts.speak(onClickData.selectionText, {
+            'rate': 0.8
+        });
     }
 });
