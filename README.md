@@ -1,17 +1,26 @@
 # Extension-Copy code and Search
-**A Chrome Extension**
+###A Chrome Extension
 
 * Add one-click copy button for code blocks on stackoverflow, github, MDN...
 * Enable searching selected text on different search engines like wikipedia, bing as well as youtube.
 * Speak out seleceted text using text-to-speech API
 
-**Visual Illustration**
+###Visual Illustration
 
-- POPUP html
-  - ![Screen-Shot-Popup](./src/images/Screen-Shot-Popup.png)
+- **Popup Html**
+  
+- <img src="./src/images/Screen-Shot-Popup.png" style="zoom:50%" />
+  
+  
+  
+  ---
+  
+- **Copy Button**
 
-- Copy Button
-  - ![Screen-Shot -CopyButton](./src/images/Screen-Shot -CopyButton.png)
+  - <img src="./src/images/Screen-Shot-CopyButton.png" style="zoom:55%" />
 
-- Context Menu Item
-  - ![Screen-Shot-Menu](./src/images/Screen-Shot-Menu.png)
+  ---
+
+- **Context Menu Item**
+
+  - <img src="./src/images/Screen-Shot-Menu.png" style="zoom:60%" />
